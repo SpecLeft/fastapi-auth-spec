@@ -209,3 +209,4 @@ marimo/_lsp/
 __marimo__/
 FEEDBACK.md
 report.html
+.vscode/settings.json
