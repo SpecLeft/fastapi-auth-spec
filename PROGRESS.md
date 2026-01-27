@@ -1,0 +1,21 @@
+# Progress Tracker
+
+- [x] **Phase 0: Initialization**
+    - [x] Create `PROGRESS.md`
+    - [x] Install dependencies (`specleft`, `fastapi`, `passlib`, `python-jose`, `pytest`, `httpx`)
+- [x] **Phase 1: Definition (SpecLeft Plan)**
+    - [x] Create `prd.md`
+    - [x] Generate feature specs (`specleft plan`)
+- [x] **Phase 2: Skeleton Generation**
+    - [x] Generate test skeletons (`specleft test skeleton`)
+    - [x] Verify initial failure (Red State)
+- [x] **Phase 3: Implementation**
+    - [x] Scaffold `main.py`
+    - [x] Implement Auth Logic (Register, Login, Protect)
+- [x] **Phase 4: Verification**
+    - [x] Verify success (Green State)
+    - [x] Check spec status
+- [x] **Phase 5: CI Automation**
+    - [x] Create `.github/workflows/specleft-demo.yml`
+    - [x] Validate workflow triggers (Cron, Dispatch, Push)
+    - [x] Implement Policy Enforcement and Reporting steps

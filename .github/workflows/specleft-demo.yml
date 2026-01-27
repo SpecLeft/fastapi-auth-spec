@@ -1,0 +1,136 @@
+name: SpecLeft AI Workflow Demo
+
+on:
+  schedule:
+    # Run weekly on Monday at 9:00 UTC
+    - cron: '0 9 * * 1'
+  workflow_dispatch:
+    # Allow manual trigger
+  push:
+    # Run on push to main for immediate feedback
+    branches: [ main ]
+
+jobs:
+  # ------------------------------------------------------------------------
+  # Job 1: Testing & Reporting
+  # ------------------------------------------------------------------------
+  test-and-report:
+    runs-on: ubuntu-latest
+    name: Test & Report
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install .
+
+      # Stage 1: Tool Health & Safety
+      - name: Tool Health Check (Doctor)
+        run: specleft doctor --format json
+
+      - name: Agent Safety Contract
+        run: specleft contract --format json
+        
+      - name: Agent Safety Contract Verification
+        run: specleft contract test --format json
+
+      # Stage 2: Testing
+      - name: Run Tests (pytest)
+        id: run-tests
+        run: |
+          pytest --junitxml=report.xml
+        # Continue so we can generate report even if tests fail
+        continue-on-error: true
+
+      # Stage 3: Reporting
+      - name: Generate SpecLeft Test Report
+        if: always() 
+        run: specleft test report --output specleft-report.html
+
+      - name: Upload SpecLeft Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: specleft-report
+          path: specleft-report.html
+
+  # ------------------------------------------------------------------------
+  # Job 2: Policy Enforcement - Core (Runs after Tests)
+  # ------------------------------------------------------------------------
+  policy-core:
+    needs: test-and-report
+    runs-on: ubuntu-latest
+    name: "Core Behaviour Coverage Gate"
+    # Run even if tests failed (because test-and-report handles failure gracefully)
+    if: always()
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install SpecLeft
+        run: |
+          python -m pip install --upgrade pip
+          pip install .
+          echo "PYTHONPATH=${GITHUB_WORKSPACE}:${PYTHONPATH}" >> $GITHUB_ENV
+
+      - name: Core Behaviour Coverage [SpecLeft]
+        run: specleft enforce .specleft/licenses/policy-core.yml
+
+  # ------------------------------------------------------------------------
+  # Job 3: Policy Enforcement - Main (Runs parallel to Core)
+  # ------------------------------------------------------------------------
+  policy-main:
+    needs: test-and-report
+    runs-on: ubuntu-latest
+    name: "Intent Coverage Gate"
+    # Run even if tests failed
+    if: always()
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install SpecLeft
+        run: |
+          python -m pip install --upgrade pip
+          pip install .
+          echo "PYTHONPATH=${GITHUB_WORKSPACE}:${PYTHONPATH}" >> $GITHUB_ENV
+
+      - name: Enforce Feature Intent [SpecLeft]
+        run: specleft enforce .specleft/licenses/policy.yml
+
+  # ------------------------------------------------------------------------
+  # Job 4: Build & Release (Mock)
+  # ------------------------------------------------------------------------
+  build-and-release:
+    needs: [policy-core, policy-main]
+    runs-on: ubuntu-latest
+    name: Build & Release
+    
+    steps:
+      - name: Mock Build/Release
+        run: |
+          echo "=========================================="
+          echo "🚀 All policies passed!"
+          echo "📦 Starting Build & Release process..."
+          echo "=========================================="
+          # In a real workflow, you would build docker images, deploy to staging, etc.
