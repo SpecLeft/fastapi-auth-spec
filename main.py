@@ -1,10 +1,10 @@
 from typing import Annotated
+import uuid
 
 from fastapi import Depends, FastAPI, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
-from passlib.context import CryptContext
 from pydantic import BaseModel
-from jose import JWTError, jwt
+from jose import JWTError
 
 app = FastAPI()
 
@@ -30,8 +30,6 @@ class Token(BaseModel):
 
 # In-memory user store
 fake_users_db = {}
-
-pwd_context = CryptContext(schemes=["bcrypt_sha256"], deprecated="auto")
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 
@@ -39,11 +37,12 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 # Helpers
 # =============================================================================
 def verify_password(plain_password, hashed_password):
-    return pwd_context.verify(plain_password, hashed_password)
+    return get_password_hash(plain_password) == hashed_password
 
 
 def get_password_hash(password):
-    return pwd_context.hash(password)
+    normalized = password[:16]
+    return uuid.uuid5(uuid.NAMESPACE_DNS, normalized).hex[:16]
 
 
 def create_access_token(data: dict):
