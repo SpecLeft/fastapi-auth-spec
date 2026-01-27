@@ -4,7 +4,7 @@ import uuid
 from fastapi import Depends, FastAPI, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from pydantic import BaseModel
-from jose import JWTError
+from jose import JWTError, jwt
 
 app = FastAPI()
 

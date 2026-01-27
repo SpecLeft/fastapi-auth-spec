@@ -25,9 +25,9 @@ jobs:
           export PYTHONPATH="${PYTHONPATH}:$(pwd)"
           
       # 1. Enforce Policy (Critical Gate)
-      - name: Enforce Policy
+      - name: 'Quality Gate: Behaviour Coverage Check'
         run: specleft enforce .specleft/licenses/policy.yml
 
       # 2. Run High-Priority Tests (Fast Feedback)
-      - name: Run Critical/High Tests
+      - name: High Priority Behaviour Tests
         run: pytest --specleft-priority critical --specleft-priority high --junitxml=pr-report.xml

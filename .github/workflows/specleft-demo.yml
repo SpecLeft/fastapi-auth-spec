@@ -68,7 +68,7 @@ jobs:
   policy-core:
     needs: test-and-report
     runs-on: ubuntu-latest
-    name: "Policy: Core"
+    name: "Core Feature Coverage"
     # Run even if tests failed (because test-and-report handles failure gracefully)
     if: always()
 
@@ -85,8 +85,9 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install .
+          export PYTHONPATH="${PYTHONPATH}:$(pwd)"
 
-      - name: SpecLeft Core Policy
+      - name: SpecLeft Core Feature Coverage Policy
         run: specleft enforce .specleft/licenses/policy-core.yml
 
   # ------------------------------------------------------------------------
@@ -95,7 +96,7 @@ jobs:
   policy-main:
     needs: test-and-report
     runs-on: ubuntu-latest
-    name: "Policy: Enforce"
+    name: "Feature Coverage Policy"
     # Run even if tests failed
     if: always()
 
@@ -113,7 +114,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install .
 
-      - name: Enforce Main Policy
+      - name: Enforce SpecLeft Feature Coverage Policy
         run: specleft enforce .specleft/licenses/policy.yml
 
   # ------------------------------------------------------------------------
