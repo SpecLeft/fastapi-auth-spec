@@ -35,7 +35,7 @@ jobs:
           echo "PYTHONPATH=${GITHUB_WORKSPACE}:${PYTHONPATH}" >> $GITHUB_ENV
 
       # Stage 1: Tool Health & Safety
-      - name: Tool Health Check (Doctor) # Skip temporarily
+      - name: Tool Health Check (Doctor)
         run: specleft doctor --format json
         continue-on-error: true
 

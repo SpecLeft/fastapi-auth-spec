@@ -323,7 +323,7 @@ requires-dist = [
     { name = "passlib", extras = ["bcrypt"], specifier = ">=1.7.4" },
     { name = "pytest", specifier = ">=9.0.2" },
     { name = "python-jose", extras = ["cryptography"], specifier = ">=3.5.0" },
-    { name = "specleft", specifier = ">=0.1.0" },
+    { name = "specleft", specifier = ">=0.1.1" },
 ]
 
 [[package]]
@@ -1053,7 +1053,7 @@ wheels = [
 
 [[package]]
 name = "specleft"
-version = "0.1.0"
+version = "0.1.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "click" },
@@ -1065,9 +1065,9 @@ dependencies = [
     { name = "python-slugify" },
     { name = "pyyaml" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/61/61/1550ef6e6ed22c43ab7fd4c840a9975f1ce5ea60be58d7f05f8ec456af5c/specleft-0.1.0.tar.gz", hash = "sha256:60eb04f813bbe3b56d4c913ee1da4622d03679bd655f6a1c2005fc213ab0fdd6", size = 68281, upload-time = "2026-01-26T17:15:42.485Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/e7/b0/36f00f01b693735e4d9fc6eba7c6bdd90d109c9ccb6bb5e0b922ad67ccdc/specleft-0.1.1.tar.gz", hash = "sha256:f5632d9d6dfe3047b6dc8fdc5751ee4f561ab83f81c4551d8cd1b8a1240aacad", size = 68283, upload-time = "2026-01-27T22:51:13.517Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/ab/63/3eb029ab6d9d7400f631f1fe2140c49654f89434667d74a620a987822bb2/specleft-0.1.0-py3-none-any.whl", hash = "sha256:7f3cfb1ece6df8526eacd3d00b83c91e28b9db61b0daa9dcf7f70af2889e083a", size = 80803, upload-time = "2026-01-26T17:15:41.316Z" },
+    { url = "https://files.pythonhosted.org/packages/fa/95/8a93a52255529c296c1f13b0126b9f9258f7d72101996d11b16b2b180236/specleft-0.1.1-py3-none-any.whl", hash = "sha256:1e0a28074960ea97885f9b5107232da97c8429e1911fc76202d0ae4d4513c5f0", size = 80813, upload-time = "2026-01-27T22:51:12.254Z" },
 ]
 
 [[package]]
