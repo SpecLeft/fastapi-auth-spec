@@ -15,3 +15,7 @@
 - [x] **Phase 4: Verification**
     - [x] Verify success (Green State)
     - [x] Check spec status
+- [x] **Phase 5: CI Automation**
+    - [x] Create `.github/workflows/specleft-demo.yml`
+    - [x] Validate workflow triggers (Cron, Dispatch, Push)
+    - [x] Implement Policy Enforcement and Reporting steps
