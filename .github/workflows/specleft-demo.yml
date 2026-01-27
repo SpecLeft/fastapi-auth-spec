@@ -81,11 +81,11 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Install SpecLeft
+      - name: Install uv and Sync Dependencies
         run: |
-          python -m pip install --upgrade pip
-          pip install .
-          echo "PYTHONPATH=${GITHUB_WORKSPACE}:${PYTHONPATH}" >> $GITHUB_ENV
+          curl -LsSf https://astral.sh/uv/install.sh | sh
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+          uv sync --frozen
 
       - name: Core Behaviour Coverage [SpecLeft]
         run: specleft enforce .specleft/licenses/policy-core.yml
@@ -109,11 +109,11 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Install SpecLeft
+      - name: Install uv and Sync Dependencies
         run: |
-          python -m pip install --upgrade pip
-          pip install .
-          echo "PYTHONPATH=${GITHUB_WORKSPACE}:${PYTHONPATH}" >> $GITHUB_ENV
+          curl -LsSf https://astral.sh/uv/install.sh | sh
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+          uv sync --frozen
 
       - name: Enforce Feature Intent [SpecLeft]
         run: specleft enforce .specleft/licenses/policy.yml
