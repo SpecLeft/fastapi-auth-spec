@@ -1,0 +1,21 @@
+policy_id: enforce-v1
+policy_version: '1.0'
+policy_type: enforce
+license:
+  license_id: lic_36fbd139982f70dc
+  licensed_to: SpecLeft/fastapi-auth-spec
+  issued_at: '2026-01-27'
+  expires_at: '2027-01-27'
+rules:
+  priorities:
+    critical:
+      must_be_implemented: true
+    high:
+      must_be_implemented: true
+  coverage:
+    threshold_percent: 100
+    fail_below: true
+signature:
+  algorithm: ed25519
+  key_id: specleft-dev-2026
+  value: sBg2S260ohChF0Zr4Jk6LzdG7VbY6nN6Sb/9lZFqQ2RzZv2OmVdRPfi3I8gtNHluacciKLkTY0olbDIkNF9DBA==

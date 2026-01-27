@@ -86,7 +86,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install .
 
-      - name: Enforce Core Policy
+      - name: SpecLeft Core Policy
         run: specleft enforce .specleft/licenses/policy-core.yml
 
   # ------------------------------------------------------------------------
@@ -95,7 +95,7 @@ jobs:
   policy-main:
     needs: test-and-report
     runs-on: ubuntu-latest
-    name: "Policy: Main"
+    name: "Policy: Enforce"
     # Run even if tests failed
     if: always()
 

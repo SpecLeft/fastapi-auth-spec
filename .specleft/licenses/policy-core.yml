@@ -1,0 +1,19 @@
+policy_id: core-v1
+policy_version: '1.0'
+policy_type: core
+license:
+  license_id: lic_36fbd139982f70dccore
+  licensed_to: SpecLeft/fastapi-auth-spec
+  issued_at: '2026-01-27'
+  expires_at: '2027-01-27'
+  derived_from: lic_36fbd139982f70dc
+rules:
+  priorities:
+    critical:
+      must_be_implemented: true
+    high:
+      must_be_implemented: true
+signature:
+  algorithm: ed25519
+  key_id: specleft-dev-2026
+  value: 0XlIDLWa3Iqyn6ZCO7qHaji3rckrHgfAYG10iEVZiMF78NQDmPtQvn+vHBrfZUUF0DcXdVuQQPC1hNrWSze0AA==
