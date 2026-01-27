@@ -25,9 +25,9 @@ jobs:
           echo "PYTHONPATH=${GITHUB_WORKSPACE}:${PYTHONPATH}" >> $GITHUB_ENV
 
           
-      # 1. Enforce Policy (Critical Gate)
-      - name: 'Quality Gate: Behaviour Coverage Check'
-        run: specleft enforce .specleft/licenses/policy.yml
+      # 1. SpecLeft Core Policy (Critical Gate)
+      - name: 'Core Feature Coverage [Quality Gate]'
+        run: specleft enforce .specleft/licenses/policy-core.yml
 
       # 2. Run High-Priority Tests (Fast Feedback)
       - name: High Priority Behaviour Tests
