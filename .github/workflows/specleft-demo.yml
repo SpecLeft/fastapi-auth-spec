@@ -37,7 +37,6 @@ jobs:
       # Stage 1: Tool Health & Safety
       - name: Tool Health Check (Doctor)
         run: specleft doctor --format json
-        continue-on-error: true
 
       - name: Agent Safety Contract
         run: specleft contract --format json
