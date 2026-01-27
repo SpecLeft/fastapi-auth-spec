@@ -1,0 +1,32 @@
+name: SpecLeft Pull Request Workflow
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  pr-check:
+    runs-on: ubuntu-latest
+    name: PR Checks
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install .
+
+      # 1. Enforce Policy (Critical Gate)
+      - name: Enforce Policy
+        run: specleft enforce .specleft/licenses/policy.yml
+
+      # 2. Run High-Priority Tests (Fast Feedback)
+      - name: Run Critical/High Tests
+        run: pytest --specleft-priority critical --specleft-priority high --junitxml=pr-report.xml
