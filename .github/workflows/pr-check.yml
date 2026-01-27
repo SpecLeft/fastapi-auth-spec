@@ -30,5 +30,5 @@ jobs:
         run: specleft enforce .specleft/licenses/policy-core.yml
 
       # 2. Run High-Priority Tests (Fast Feedback)
-      - name: High Priority Behaviour Tests
+      - name: Behaviour Tests [High+ Priority]
         run: pytest --specleft-priority critical --specleft-priority high --junitxml=pr-report.xml

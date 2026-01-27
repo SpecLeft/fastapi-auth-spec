@@ -68,7 +68,7 @@ jobs:
   policy-core:
     needs: test-and-report
     runs-on: ubuntu-latest
-    name: "Core Feature Coverage"
+    name: "Core Behaviour Coverage Gate"
     # Run even if tests failed (because test-and-report handles failure gracefully)
     if: always()
 
@@ -87,7 +87,7 @@ jobs:
           pip install .
           echo "PYTHONPATH=${GITHUB_WORKSPACE}:${PYTHONPATH}" >> $GITHUB_ENV
 
-      - name: SpecLeft Core Feature Coverage Policy
+      - name: Core Behaviour Coverage [SpecLeft]
         run: specleft enforce .specleft/licenses/policy-core.yml
 
   # ------------------------------------------------------------------------
@@ -96,7 +96,7 @@ jobs:
   policy-main:
     needs: test-and-report
     runs-on: ubuntu-latest
-    name: "Feature Coverage Policy"
+    name: "Intent Coverage Gate"
     # Run even if tests failed
     if: always()
 
@@ -113,8 +113,9 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install .
+          echo "PYTHONPATH=${GITHUB_WORKSPACE}:${PYTHONPATH}" >> $GITHUB_ENV
 
-      - name: Enforce SpecLeft Feature Coverage Policy
+      - name: Enforce Feature Intent [SpecLeft]
         run: specleft enforce .specleft/licenses/policy.yml
 
   # ------------------------------------------------------------------------
