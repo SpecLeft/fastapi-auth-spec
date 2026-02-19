@@ -10,5 +10,5 @@ dependencies = [
     "passlib[bcrypt]>=1.7.4",
     "pytest>=9.0.2",
     "python-jose[cryptography]>=3.5.0",
-    "specleft>=0.1.1",
+    "specleft>=0.2.2",
 ]
